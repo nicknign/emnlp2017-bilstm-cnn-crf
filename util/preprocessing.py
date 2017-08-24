@@ -32,7 +32,7 @@ def perpareDataset(embeddingsPath, datasetFiles, frequencyThresholdUnknownTokens
     """
     embeddingsName = os.path.splitext(embeddingsPath)[0]
     datasetName = "_".join(sorted([datasetFile[0] for datasetFile in datasetFiles])+[embeddingsName])
-    outputPath = 'pkl/'+datasetName+'.pkl'
+    outputPath = './pkl/'+datasetName+'.pkl'
     
     if os.path.isfile(outputPath):
         logging.info("Using existent pickle file: %s" % outputPath)
