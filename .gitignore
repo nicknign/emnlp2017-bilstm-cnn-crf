@@ -22,6 +22,7 @@ lichtenberg_scripts/MultiTask
 /levy_deps.words
 
 data/ace
+data/AutoForce
 data/conll2003_ner
 data/ecb+
 data/tac2015
