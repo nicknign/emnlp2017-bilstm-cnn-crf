@@ -46,7 +46,6 @@ def readCoNLL(inputPath, cols, commentSymbol=None, valTransformation=None):
         splits = line.split()
         for colIdx, colName in cols.items():
             val = splits[colIdx]
-            
             if valTransformation != None:
                 val = valTransformation(colName, val, splits)
             sentence[colName].append(val)  

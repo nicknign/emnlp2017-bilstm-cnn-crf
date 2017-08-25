@@ -36,7 +36,7 @@ if K._BACKEND == 'tensorflow':
             equal to reference[1:batch_size, indices]
         '''
         batch_size = K.shape(reference)[0]
-        indices = tf.pack([tf.range(batch_size), indices], axis=1)
+        indices = tf.stack([tf.range(batch_size), indices], axis=1)
         return tf.gather_nd(reference, indices)
 else:
     import theano.tensor as T

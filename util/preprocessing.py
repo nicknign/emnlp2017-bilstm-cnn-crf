@@ -5,6 +5,8 @@ import os.path
 import nltk
 import logging
 from nltk import FreqDist
+import pandas as pd
+import json
 
 from .WordEmbeddings import wordNormalize
 from .CoNLL import readCoNLL
@@ -15,6 +17,9 @@ if (sys.version_info > (3, 0)):
 else: #Python 2.7 imports
     import cPickle as pkl
     from io import open
+
+reload(sys)
+sys.setdefaultencoding('utf8')
 
 def perpareDataset(embeddingsPath, datasetFiles, frequencyThresholdUnknownTokens=50, reducePretrainedEmbeddings=False, commentSymbol=None):
     """
@@ -44,6 +49,8 @@ def perpareDataset(embeddingsPath, datasetFiles, frequencyThresholdUnknownTokens
             getLevyDependencyEmbeddings()
         elif embeddingsPath == '2014_tudarmstadt_german_50mincount.vocab.gz':
             getReimersEmbeddings()
+        elif embeddingsPath == 'chinese_word.words':
+            getChineseEmbeddings()
         else:
             print("The embeddings file %s was not found" % embeddingsPath)
             exit()
@@ -120,9 +127,9 @@ def perpareDataset(embeddingsPath, datasetFiles, frequencyThresholdUnknownTokens
     
     # Extend embeddings file with new tokens 
     def createFD(filename, tokenIndex, fd, word2Idx):    
-        for line in open(filename):
+        for line in open(filename, encoding="utf-8"):
             
-            if line.startswith('#'):
+            if line.startswith(u'#') or line.startswith(u'*'):
                 continue
             
             splits = line.strip().split()      
@@ -246,6 +253,7 @@ def createMatrices(sentences, mappings, padOneTokenSentence=True):
                     
             for entry in sentence[mapping]:                
                 if mapping.lower() == 'tokens':
+                    entry = unicode(entry)
                     numTokens += 1
                     idx = str2Idx['UNKNOWN_TOKEN']
                     
@@ -384,5 +392,17 @@ def getReimersEmbeddings():
     if not os.path.isfile("2014_tudarmstadt_german_50mincount.vocab.gz"):
         print("Start downloading word embeddings from Reimers et al. ...")
         os.system("wget https://public.ukp.informatik.tu-darmstadt.de/reimers/2014_german_embeddings/2014_tudarmstadt_german_50mincount.vocab.gz")
-    
-   
+
+def getChineseEmbeddings():
+    #if not os.path.isfile("chinese_word.words"):
+    vecdf = pd.read_csv("vec.csv", encoding="utf-8")
+    with open("chinese_word.words", "w", encoding="utf-8") as fp:
+        for index, row in vecdf.iterrows():
+            word = row["word"]
+            veclist = json.loads(row["vec"])
+            while isinstance(veclist, unicode):
+                veclist = json.loads(veclist)
+            vec = map(unicode, veclist)
+            vecstr = " ".join(vec)
+            fp.write(u"{} {}\n".format(word, vecstr))
+
