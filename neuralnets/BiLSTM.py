@@ -13,6 +13,7 @@ from keras.layers import *
 from keras.optimizers import *
 
 import os
+import shutil
 import sys
 import random
 import time
@@ -24,7 +25,6 @@ from .keraslayers.ChainCRF import ChainCRF
 import util.BIOF1Validation as BIOF1Validation
 
 
-import sys
 if (sys.version_info > (3, 0)):
     import pickle as pkl
 else: #Python 2.7 imports
@@ -292,15 +292,17 @@ class BiLSTM:
                 
             self.additionalFeatures.append('characters')
         
-        model = Sequential();
-        model.add(Merge(mergeLayers, mode='concat')) 
+        model = Sequential()
+        model.add(Merge(mergeLayers, mode='concat'))
         
          
         # Add LSTMs
         cnt = 1
         for size in params['LSTM-Size']:
             if isinstance(params['dropout'], (list, tuple)):
-                model.add(Bidirectional(LSTM(size, return_sequences=True, dropout_W=params['dropout'][0], dropout_U=params['dropout'][1]), name="varLSTM_"+str(cnt)))
+                model.add(Bidirectional(
+                    LSTM(size, return_sequences=True, dropout_W=params['dropout'][0], dropout_U=params['dropout'][1]),
+                    name="varLSTM_" + str(cnt)))
             
             else:
                 """ Naive dropout """
@@ -356,7 +358,7 @@ class BiLSTM:
         self.model = model
         if self.verboseBuild:            
             model.summary()
-            logging.debug(model.get_config())            
+            logging.debug(model.get_config())
             logging.debug("Optimizer: %s, %s" % (str(type(opt)), str(opt.get_config())))
             
     def storeResults(self, resultsFilepath):
@@ -373,8 +375,12 @@ class BiLSTM:
     def evaluate(self, epochs):  
         logging.info("%d train sentences" % len(self.dataset['trainMatrix']))     
         logging.info("%d dev sentences" % len(self.dataset['devMatrix']))   
-        logging.info("%d test sentences" % len(self.dataset['testMatrix']))   
-        
+        logging.info("%d test sentences" % len(self.dataset['testMatrix']))
+
+        modelsavedir = os.path.dirname(self.modelSavePath)
+        if os.path.exists(modelsavedir):
+            shutil.rmtree(modelsavedir)
+
         devMatrix = self.dataset['devMatrix']
         testMatrix = self.dataset['testMatrix']
    
@@ -567,6 +573,7 @@ class BiLSTM:
         return numCorrLabels/float(numLabels)
     
     def loadModel(self, modelPath):
+        logging.debug("load model start, {}".format(modelPath))
         import h5py
         import json
         from neuralnets.keraslayers.ChainCRF import create_custom_objects
@@ -583,4 +590,5 @@ class BiLSTM:
             
         self.model = model        
         self.setMappings(None, mappings)
+        logging.debug("load model end")
         

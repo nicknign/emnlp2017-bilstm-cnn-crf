@@ -308,7 +308,7 @@ class ChainCRF(Layer):
 
         super(ChainCRF, self).__init__(**kwargs)
 
-    def get_output_shape_for(self, input_shape):
+    def compute_output_shape(self, input_shape):
         assert input_shape and len(input_shape) == 3
         return (input_shape[0], input_shape[1], input_shape[2])
 
