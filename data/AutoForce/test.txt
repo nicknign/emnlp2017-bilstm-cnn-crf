@@ -1,0 +1,285 @@
+0 有 O
+1 定速巡航 B-DSXH
+2 么 O
+* ISQUERY
+
+0 有 O
+1 倒车 B-DCYX
+2 影像 I-DCYX
+3 么 O
+* ISQUERY
+
+0 有 O
+1 天窗 B-TC
+2 么 O
+* ISQUERY
+
+0 防撞 B-SAFE
+1 么 O
+* 安全性
+
+0 我 O
+1 主要 O
+2 考虑 O
+3 的 O
+4 就是 O
+5 安全 B-SAFE
+6 问题 O
+* 安全性
+
+0 那 O
+1 这车 O
+2 结实 B-SAFE
+3 么 O
+4 ？ O
+* 安全性
+
+0 结实 B-SAFE
+1 么 O
+* 安全性
+
+0 这 O
+1 车 O
+2 结实 B-SAFE
+3 吗 O
+4 ？ O
+* 安全性
+
+0 就是 O
+1 禁撞 B-SAFE
+2 是 O
+3 吧 O
+4 ？ O
+* 安全性
+
+0 车 O
+1 结实 B-SAFE
+2 么 O
+* 安全性
+
+0 那 O
+1 他 O
+2 安全 B-SAFE
+3 么 O
+* 安全性
+
+0 百公里 B-BGLJS
+1 加速 I-BGLJS
+2 快 O
+3 不快 O
+4 啊 O
+5 ？ O
+* QUERY
+
+0 那 O
+1 我 O
+2 要 O
+3 放 O
+4 什么 O
+5 的 O
+6 行李箱 B-HBX
+7 婴儿车 O
+8 什么 O
+9 的 O
+10 都 O
+11 能 O
+12 放下 O
+13 么 O
+14 ？ O
+* QUERY
+
+0 那经 O
+1 撞性 O
+2 怎么样 O
+3 啊 O
+4 ？ O
+* 安全性
+
+0 有些 O
+1 费油 O
+* 油耗太高
+
+0 比如 O
+1 侧面 O
+2 撞 O
+3 有 O
+4 什么 O
+5 防护 O
+6 么 O
+* 安全性
+
+0 有 O
+1 什么 O
+2 防护 O
+3 么 O
+* 安全性
+
+0 那 O
+1 咱们 O
+2 这个 O
+3 车 O
+4 跟 O
+5 别的 O
+6 品牌 O
+7 比 O
+8 的话 O
+9 好 B-GOOD
+10 在 O
+11 哪 O
+12 ？ O
+* COMPARE
+
+0 性能 B-CAPABILITY
+1 差 O
+2 在 O
+3 哪 O
+4 了 O
+* COMPARE
+
+0 哪个 O
+1 性价比 O
+2 高 O
+3 一点 O
+* COMPARE
+
+0 相差 O
+1 什么 O
+2 东西 O
+3 么 O
+4 ？ O
+* COMPARE
+
+0 那 O
+1 这 O
+2 钱 O
+3 都 O
+4 差 O
+5 在 O
+6 哪 O
+7 了 O
+8 ？ O
+* COMPARE
+
+0 我想 O
+1 问下 O
+2 他 O
+3 跟 O
+4 同 O
+5 等级 O
+6 的 O
+7 车 O
+8 优势 B-GOOD
+9 在 O
+10 哪 O
+11 ？ O
+* INFO
+
+0 您 O
+1 就 O
+2 说 O
+3 一下 O
+4 多 O
+5 什么 O
+6 东西 O
+* COMPARE
+
+0 那内个 O
+1 车 O
+2 比 O
+3 这个 O
+4 车大 B-CKG
+5 多少 O
+6 ？ O
+* COMPARE
+
+0 这俩 O
+1 车 B-CKG
+2 宽 I-CKG
+3 高 I-CKG
+4 都 O
+5 一样 O
+6 么 O
+7 ？ O
+* COMPARE
+
+0 这 O
+1 俩 O
+2 油耗 B-YH
+3 差不多 O
+4 么 O
+5 ？ O
+* COMPARE
+
+0 技术型 B-MODEL
+1 跟 O
+2 时尚 B-MODEL
+3 型 I-MODEL
+4 差 O
+5 在 O
+6 哪 O
+* COMPARE
+
+0 价格 B-PRICE
+* QUERY
+
+0 型号 B-AMODEL
+* QUERY
+
+0 厂商 B-AFAC
+* QUERY
+
+0 价格 B-PRICE
+1 是 O
+2 多少 O
+* QUERY
+
+0 多少 B-PRICE
+1 钱 I-PRICE
+* QUERY
+
+0 多钱 B-PRICE
+* QUERY
+
+0 都 O
+1 有 O
+2 什么 O
+3 颜色 B-COLOUR
+* QUERY
+
+0 都 O
+1 有 O
+2 什么 O
+3 类型 B-GRADE
+4 的 O
+* QUERY
+
+0 都 O
+1 有 O
+2 哪些 O
+3 厂商 B-AFAC
+* QUERY
+
+0 都 O
+1 有 O
+2 什么 O
+3 型号 B-AMODEL
+4 的 O
+* QUERY
+
+0 什么 O
+1 型号 B-AMODEL
+* QUERY
+
+0 都 O
+1 有 O
+2 什么 O
+* QUERY
+
+0 排量 B-PL
+1 多少 O
+* QUERY
+
+0 手动档 B-BSX
+1 还是 O
+2 自动档 B-BSX
+* QUERY

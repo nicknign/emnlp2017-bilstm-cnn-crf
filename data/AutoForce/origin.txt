@@ -1,0 +1,328 @@
+你好,你好,你好
+你是做什么的,COMMON_BOT作用,你是做什么的
+你是谁,COMMON_BOT作用,你是做什么的
+我想看辆车,看车,我想看辆车
+我要看辆车,看车,我要看辆车
+我要买辆车,看车,我要买辆车
+我想买辆车,看车,我想买辆车
+我要买车,看车,我要买车
+我要看车,看车,我要看车
+汉兰达的车有没有,SEARCH, <modeldesc> 的车有没有
+有没有汉兰达的车,SEARCH,有没有 <modeldesc> 的车
+给我看辆长安CS15的车,SEARCH,给我看辆 <modeldesc> 的车
+我想了解下长安CS15的车,SEARCH,我想了解下 <modeldesc> 的车
+我想看下长安CS15的车,SEARCH,我想看下 <modeldesc> 的车
+我想看手动舒适版的,SEARCH,我想看 <modeldesc> 的
+给我看辆丰田或者本田的车,SEARCH,给我看辆 <factory> <terminology>  <or>  <factory> <terminology> 的车
+有没有本田或丰田的车,SEARCH,有没有 <factory> <terminology>  <or>  <factory> <terminology> 的车
+给我看看精英版或者时尚版的车,SEARCH,给我看看 <modeldesc>  <or>  <modeldesc> 的车
+20万到30万的车有哪些推荐的,SEARCH, <factoryprice> 的车有哪些推荐的
+我想看辆二三十万的车,SEARCH,我想看辆 <factoryprice> 的车
+我想看辆20万左右的车,SEARCH,我想看辆 <factoryprice> 的车
+15万左右的,SEARCH, <factoryprice> 的
+二三十万的,SEARCH, <factoryprice> 的
+推荐个家用suv,SEARCH,推荐个家用 <grade> 
+推荐一辆小型SUV车,SEARCH,推荐一辆 <grade> 车
+我要买一辆中型SUV,SEARCH,我要买一辆 <grade>
+大众越野车推荐,SEARCH, <factory> 越野车推荐
+最近有什么新款没有,SEARCH,最近有什么 <condition> 没有
+你这有长安的车么,SEARCH,你这有 <factory> 的车么
+我想看一辆长安的车,SEARCH,我想看一辆 <factory> 的车
+我想看一辆5座的车,SEARCH,我想看一辆 <seatnum> 的车
+我想看辆长安的车,SEARCH,我想看辆 <factory> 的车
+我想看辆丰田的车,SEARCH,我想看辆 <factory> <terminology> 的车
+你这有没有长安CS15的车,SEARCH,你这有没有 <modeldesc> 的车
+有没有什么新款的车,SEARCH,有没有什么 <condition> 的车
+有什么新车没有,SEARCH,有什么 <condition> 没有
+给我看一辆长安CS15的车,SEARCH,给我看一辆 <modeldesc> 的车
+我想看长安CS15的车,SEARCH,我想看 <modeldesc> 的车
+我要汉兰达,SEARCH,我要 <modeldesc>
+我要宝马,SEARCH,我要 <factory>
+长安CS15的呢,SEARCH, <modeldesc> 的呢
+你这有CS15的车么,SEARCH,你这有 <modeldesc> 的车么
+给我看辆SUV的车,SEARCH,给我看辆 <grade> 的车
+你知道北京现代么,SEARCH,你知道 <factory> 么
+途观来一个,SEARCH, <modeldesc> 来 <seatnum>
+最新的mpv有哪些,SEARCH, <condition> 的 <grade> <modeldesc> 有哪些
+这辆车多少钱,QUERY,这辆车 <factoryprice> 
+多少钱,QUERY, <factoryprice>
+价格,QUERY, <factoryprice> 
+型号,QUERY, <modeldesc> 
+厂商,QUERY, <factory> 
+价格是多少,QUERY, <factoryprice> 是多少
+多少钱,QUERY, <factoryprice> 
+多钱,QUERY, <factoryprice> 
+都有什么颜色,QUERY,都有什么颜色
+都有什么类型的,QUERY,都有什么 <grade> 的
+都有哪些厂商,QUERY,都有哪些 <factory> 
+都有什么型号的,QUERY,都有什么 <modeldesc> 的
+什么型号,QUERY,什么 <modeldesc> 
+都有什么,QUERY,都有什么
+排量多少,QUERY, <columns> 多少
+手动档还是自动档,QUERY, <transmisson> 还是 <transmisson> 
+最高车速是多少,QUERY, <columns> 是多少
+最大车速是多少,QUERY, <columns> 是多少
+什么类型的,QUERY,什么 <grade> 的
+多少个座位,QUERY,多少个 <seatnum>
+几个座位,QUERY,几个 <seatnum> 
+支持自动停车功能么,QUERY,支持 <columns> 功能么
+有没有儿童安全座椅接口,QUERY,有没有 <columns> 接口
+有没有智能操作系统,QUERY,有没有 <modeldesc> 操作系统
+空调的排风口在哪里,QUERY, <modeldesc> 的排风口在哪里
+有没有后排空调的排风口,QUERY,有没有后排 <modeldesc> 的排风口
+座椅的材质是什么,QUERY,座椅的材质是什么
+有没有侧边雷达,QUERY,有没有侧边雷达
+油耗是多少,QUERY, <rfuelconsumption> 是多少
+这辆车的油耗是多少,QUERY,这辆车的 <rfuelconsumption> 是多少
+质保时间有多长,QUERY,质保时间有多长
+发动机介绍下,QUERY, <columns> <terminology> 介绍下
+多媒体介绍下,QUERY,多媒体介绍下
+具体有哪些型号的,QUERY,具体有哪些 <modeldesc> 的
+有哪些版本的,QUERY,有哪些 <modeldesc> 的
+发动机的排量是多少,QUERY, <displacementL> 是多少
+问下长安CS15的车现在怎么卖,QUERY,问下 <modeldesc> 的车现在 <factoryprice>
+长安CS15的价格是多少,QUERY, <modeldesc> 的 <factoryprice> 是多少
+长安CS15的车都有哪些款式的,QUERY, <modeldesc> 的车都有哪些 <modeldesc> 的
+长安汽车都有哪些型号,QUERY, <factory> 都有哪些 <modeldesc>
+汉兰达多少钱,QUERY, <modeldesc>  <factoryprice>
+长安CS15多少钱,QUERY, <modeldesc>  <factoryprice>
+2015款汉兰达多少钱,QUERY, <modeldesc> 款汉兰达 <factoryprice>
+奔驰e级多少钱,QUERY, <factory>  <modeldesc>  <factoryprice>
+别克GL8的配置是怎样的,QUERY, <modeldesc> 的 <comment> 是怎样的
+北京奔驰,PARA, <factory>
+奔驰,PARA, <factory>
+保时捷,PARA, <factory> 
+铃木,PARA, <factory>
+车的价格,QUERY,车的 <factoryprice>
+宝马,PARA, <factory> 
+长安,PARA, <factory> 
+华晨宝马,PARA, <factory> 
+20万,PARA, <factoryprice> 
+20,PARA, <number> 
+长安,PARA, <factory> 
+丰田,PARA, <factory> <terminology> 
+奔奔,PARA, <modeldesc> 
+CS15,PARA, <modeldesc>
+第五代发现,PARA, <modeldesc> 
+揽胜,PARA, <modeldesc> 
+路虎,PARA, <factory> 
+5座,PARA, <seatnum>
+小型SUV,PARA, <grade> 
+中型SUV,PARA, <grade>
+中大型SUV,PARA, <grade> 
+紧凑型SUV,PARA, <grade>
+紧凑型车,PARA, <grade> 
+中型车,PARA, <grade> 
+中大型车,PARA, <grade> 
+大型车,PARA, <grade> 
+小型车,PARA, <grade>
+跑车,PARA, <grade> 
+SUV,PARA, <grade> 
+什么是电控涡轮增压器,TERMINOLOGY,什么是 <terminology> 
+什么是丰田,TERMINOLOGY,什么是 <factory> <terminology> 
+电控涡轮增压器是什么,TERMINOLOGY, <terminology> 是什么
+丰田是什么,TERMINOLOGY, <factory> <terminology> 是什么
+解释下电控涡轮增压器,TERMINOLOGY,解释下 <terminology> 
+解释下丰田,TERMINOLOGY,解释下 <factory> <terminology> 
+收到不支持的消息类型，暂无法显示,收到不支持的消息类型,收到不支持的消息 <grade> ，暂无法显示
+你这有没有长安CS15的车,YOUQUERY,你这有没有 <modeldesc> 的车
+这辆车的马力怎么样,QUERY,这辆车的 <columns> 怎么样
+有白色的吗,ISQUERY,有 <colour> 的吗
+有没有白色的,ISQUERY,有没有 <colour> 的
+有儿童安全座椅么,ISQUERY,有 <columns> 么
+有没有儿童安全座椅,ISQUERY,有没有 <columns> 
+有没有自动停车功能,ISQUERY,有没有 <columns> 功能
+是不是SUV,ISQUERY,是不是 <grade> 
+支不支持后排独立空调,ISQUERY,支不支持 <columns> 
+具体有哪些型号的,QUERY,具体有哪些 <modeldesc> 的
+是手动挡还是自动挡的,QUERY,是 <transmisson> 还是 <transmisson> 的
+CS15手动舒适版是手动挡还是自动挡的,QUERY, <modeldesc>  <modeldesc> 是 <transmisson> 还是 <transmisson> 的
+有优惠么,优惠,有优惠么
+优惠是怎样的,优惠,优惠是怎样的
+优惠怎么算,优惠,优惠怎么算
+优惠政策,优惠,优惠政策
+优惠政策是什么,优惠,优惠政策是什么
+优惠,优惠,优惠
+百公里加速是多少,QUERY, <alr100kmh> 是多少
+油耗有点太高了吧,油耗太高, <rfuelconsumption> 有点太高了吧
+那怎样可以试车呢,如何试车,那怎样可以试车呢
+我想试试这辆车怎么办,如何试车,我想试试这辆车怎么办
+帮我安排下试车,安排试车,帮我安排下试车
+好的了解的差不多了我考虑考虑,用户考虑,好的了解的差不多了我考虑考虑
+我考虑考虑,用户考虑,我考虑考虑
+这辆车性能怎么样,HOW,这辆车 <comment> 怎么样
+驾驶怎么样,HOW, <comment> 怎么样
+舒适度如何,HOW, <comment> 如何
+做工细节怎么样,HOW, <comment> 怎么样
+做工细节,HOW, <comment>
+驾驶,HOW, <comment> 
+内饰,PARA, <comment>
+油耗,PARA, <rfuelconsumption>
+操控性怎么样,HOW, <comment> 怎么样
+操控性,HOW, <comment> 
+长安cs15哪里好,HOW, <modeldesc> 哪里好
+耗油比其他好多少,HOW,耗油比其他好多少
+内饰怎么样,HOW, <comment> 怎么样
+油耗怎么样,HOW, <rfuelconsumption> 怎么样
+油耗如何,HOW, <rfuelconsumption> 如何
+这辆车怎么样,HOW,这辆车怎么样
+长安CS15怎么样,HOW, <modeldesc> 怎么样
+汉兰达怎么样,HOW, <modeldesc> 怎么样
+都有什么区别,COMPARE,都有什么区别
+豪华版和时尚版有什么区别,COMPARE, <modeldesc>  <or>  <modeldesc> 版有什么区别
+奔驰和宝马哪个好,COMPARE, <factory>  <or>  <factory> 哪个好
+奔驰和宝马怎么样,COMPARE, <factory>  <or>  <factory> 怎么样
+长安CS15和汉兰达相比怎么样,COMPARE, <modeldesc>  <or>  <modeldesc> 相比怎么样
+奔驰C级和奥迪A4有什么区别,COMPARE, <factory>  <modeldesc>  <or>  <modeldesc> 有什么区别
+安全性如何,安全性,安全性如何
+这辆车的安全性怎么样,安全性,这辆车的安全性怎么样
+车上有什么安全装备,安全性,车上有什么安全 <modeldesc> 
+有什么安全性装备,安全性,有什么安全性 <modeldesc> 
+有什么安全措施,安全性,有什么安全措施
+是否有真皮方向盘,ISQUERY,是否有 <columns> <terminology> 
+有夜视系统么,ISQUERY,有 <columns> <terminology> 么
+有没有真皮座椅,ISQUERY,有没有 <seatmaterial> 座椅
+有没有真皮方向盘,ISQUERY,有没有 <columns> <terminology>
+这辆车的车险是多少,车险,这辆车的车险是多少
+车险多少钱,车险,车险 <factoryprice> 
+车险是怎么算的,车险,车险是怎么算的
+车险是多少,车险,车险是多少
+北京天气怎么样,天气, <factory> 天气怎么样
+北京天气,天气, <factory> 天气
+今天天气如何,天气,今天天气如何
+今天天气,天气,今天天气
+给我查查明天天气,天气,给我查查明天天气
+北京天气如何,天气, <factory> 天气如何
+vr,VR技术,vr
+vr技术,VR技术,vr <modeldesc> 
+vr是什么,VR技术,vr是什么
+汽车vr,汽车VR, <factory> vr
+什么是汽车vr,汽车VR,什么是 <factory> vr
+汽车vr是什么,汽车VR, <factory> vr是什么
+车势瓦力是谁,车势瓦力,车势瓦力是谁
+帮我介绍下长安CS15,INFO,帮我介绍下 <modeldesc>
+帮我介绍下汉兰达,INFO,帮我介绍下 <modeldesc>
+给我介绍下这辆车,INFO,给我介绍下这辆车
+介绍下长安CS15,INFO,介绍下 <modeldesc>
+介绍下汉兰达,INFO,介绍下 <modeldesc>
+介绍下这辆车,INFO,介绍下这辆车
+帮我介绍一下广汽丰田汉兰达,INFO,帮我介绍一下 <factory>  <modeldesc>
+附近有哪些4s店,4S店相关,附近有哪些4s店
+4s店有哪些,4S店相关,4s店有哪些
+4s店,4S店相关,4s店
+我可以怎么联系4s店,4S店相关,我可以怎么联系4s店
+哪些4s店在卖,4S店相关,哪些4s店在卖
+最贵的车是哪辆,最贵的车,最贵的车是哪辆
+最贵的车,最贵的车,最贵的车
+有什么车,OVERVIEW,有什么车
+你有哪些车,OVERVIEW,你有哪些车
+都有什么车,OVERVIEW,都有什么车
+目前都有什么车在卖,OVERVIEW,目前都有什么车在卖
+你这有多少车,OVERVIEW,你这有多少车
+多媒体,QUERY,多媒体
+内饰,QUERY, <comment>
+这有什么的阿？,INFO,这有什么的阿？
+内个普拉多好吗？,HOW,内个 <modeldesc> 好吗？
+能跟我稍微介绍一下这车么，不太了解,INFO,能跟我稍微介绍一下这车么，不太了解
+这车优点在哪？,INFO,这车优点在哪？
+这车是什么配置的？,INFO,这车是什么 <comment> 的？
+我想知道它的优点,INFO,我想知道它的优点
+什么配置？,INFO,什么 <comment> ？
+高配还是低配？,INFO, <modeldesc> 还是低配？
+那您觉得这车有什么优点啊,INFO,那您觉得这车有什么优点啊
+这款性价比挺高的是么？,INFO,这款性价比挺 <lenwidhig> 的是么？
+这车的性价比怎么样啊？,INFO,这车的性价比怎么样啊？
+那咱们这个车跟别的品牌比的话好在哪？ ,INFO,那咱们这个车跟别的 <factory> 比的话好在哪？ 
+我想问下3系大概多少钱,QUERY,我想问下 <number> 系大概 <factoryprice>
+想看一下小轿车,SEARCH,想看一下小轿车
+我想看看日系车,SEARCH,我想看看日系车
+贵多少 差多少钱啊？,COMPARE ,贵多少 差 <factoryprice> 啊？
+3.5的比2.7的贵多少 中配跟低配差多少钱？,COMPARE , <number> 的比 <number> 的贵多少 中配跟低配差 <factoryprice> ？
+ 你这俩差多少钱？ ,COMPARE , 你这俩差 <factoryprice> ？ 
+我问一下这车跟内车的价钱差多少啊？ ,COMPARE ,我问一下这车跟内车的价钱差多少啊？ 
+内个差多少钱啊？ ,COMPARE ,内个差 <factoryprice> 啊？ 
+比这贵多少？ ,COMPARE ,比这贵多少？ 
+性能差在哪了 ,COMPARE , <modeldesc> <comment> 差在哪了 
+价钱差多少 普通款运动款差多少钱？ ,COMPARE ,价钱差多少  <modeldesc>  <modeldesc> 款差 <factoryprice> ？ 
+5座跟7座的价格差多少 哪款便宜啊,COMPARE , <seatnum> 跟 <seatnum> 的 <factoryprice> 差多少 哪款便宜啊
+高配是多少钱啊？,QUERY , <modeldesc> 是 <factoryprice> 啊？
+他那个轱辘是多大啊？,QUERY,他那个轱辘是多大啊？
+轮胎呢,QUERY, <fronttirespec> 呢
+备胎呢,QUERY, <sparetirespec> 呢
+备胎是多大的？,QUERY, <sparetirespec> 是多大的？
+长宽高呢,QUERY, <lenwidhig> 呢
+油箱呢,QUERY, <fueltankcapacity> 呢
+发动机是什么的,QUERY, <columns> <terminology> 是什么的
+后备箱多大？,QUERY, <luggagecapacity> 多大？
+质保呢,QUERY,质保呢
+这款车是多大排量的？,QUERY,这款车是多大排量的？
+那保修和质保期呢？,QUERY,那 <autowarranty>  <or>  <autowarranty> 期呢？
+那发动机呢？,QUERY,那 <columns> <terminology> 呢？
+这个备胎是不是全尺寸呢？,QUERY,这个 <sparetirespec> 是不是 <sparetirespec> 呢？
+咱这车油箱多少？ ,QUERY,咱这车 <fueltankcapacity> 多少？ 
+后备箱呢？,QUERY, <luggagecapacity> 呢？
+这车长多少？,QUERY,这车长多少？
+宽呢？,QUERY, <lenwidhig> 呢？
+高呢？,QUERY, <lenwidhig> 呢？
+轴距大概是？,QUERY, <columns> <terminology> 大概是？
+油箱多大,QUERY, <fueltankcapacity> 多大
+轴距多长,QUERY, <columns> <terminology> 多长
+后备箱大吗？,QUERY, <luggagecapacity> 大吗？
+那里边内饰都是真皮座椅么,QUERY,那里边 <neishi> 都是 <seatmaterial>  <seatmaterial> 么
+提速呢？,QUERY, <alr100kmh> 呢？
+这车是加什么的油,QUERY,这车是 <fuellabel> 
+车多沉啊？,QUERY, <curbquality> 啊？
+空调最后一排有出风口么,QUERY, <modeldesc>  <rearseatairoutlet> 么
+有天窗么,QUERY,有 <modeldesc> <panoramicsunroof> 么
+底盘离地面多高,QUERY, <rlidijianxi> 多高
+有定速巡航么,ISQUERY,有 <columns> <terminology> 么
+有倒车影像么,ISQUERY,有 <reversevideoimage> 么
+有天窗么,ISQUERY,有 <panoramicsunroof> 么
+防撞么,安全性,防撞么
+我主要考虑的就是安全问题,安全性,我主要考虑的就是安全问题
+那这车结实么？,安全性,那这车结实么？
+结实么,安全性,结实么
+这车结实吗？,安全性,这车结实吗？
+就是禁撞是吧？,安全性,就是禁撞是吧？
+车结实么,安全性,车结实么
+那他安全么,安全性,那他安全么
+百公里加速快不快啊？,QUERY, <alr100kmh> 快不快啊？
+那我要放什么的行李箱婴儿车什么的都能放下么？,QUERY,那我要放什么的行李箱婴儿车什么的都能放下么？
+那经撞性怎么样啊？,安全性,那经撞性怎么样啊？
+有些费油,油耗太高,有些费油
+比如侧面撞有什么防护么,安全性,比如侧面撞有什么防护么
+有什么防护么,安全性,有什么防护么
+那咱们这个车跟别的品牌比的话好在哪？,INFO,那咱们这个车跟别的 <factory> 比的话好在哪？
+性能差在哪了,COMPARE, <comment> 差在哪了
+哪个性价比高一点,COMPARE,哪个性价比 <lenwidhig> 一点
+相差什么东西么？,COMPARE,相差什么东西么？
+那这钱都差在哪了？,COMPARE,那这钱都差在哪了？
+我想问下他跟同等级的车优势在哪？,INFO,我想问下他跟同等级的车优势在哪？
+您就说一下多什么东西,COMPARE,您就说一下多什么东西
+那内个车比这个车大多少？,COMPARE,那内个车比这个车大多少？
+这俩车宽高都一样么？,COMPARE,这俩 <lenwidhig>  <lenwidhig> 都一样么？
+这俩油耗差不多么？,COMPARE,这俩 <rfuelconsumption> 差不多么？
+技术型跟时尚型差在哪,COMPARE, <modeldesc> 跟 <modeldesc> 差在哪
+他优点在哪 ,INFO,他优点在哪 
+别克GL8的配置是怎样的,INFO, <modeldesc> 的 <comment> 是怎样的
+跟他同级别的好在哪里 ,INFO,跟他同级别的好在哪里 
+哪个安全性能好啊,COMPARE,哪个安全 <comment> 好啊
+哪款车比较大啊？,COMPARE,哪款车比较 <lenwidhig> 啊？
+跟他同等系数的车这车好在哪 ,INFO,跟他同等系数的车这车好在哪 
+除了一个是两驱一个是四驱还有什么区别,COMPARE,除了 <autowarranty> <seatnum> 是 <modeldesc>  <autowarranty> <seatnum> 是 <drivemode> <modeldesc> 还有什么区别
+查看参数表,PARALIST,查看参数表
+给我看看参数表,PARALIST,给我看看参数表
+参数表,PARALIST,参数表
+是的,YES,是的
+好,YES,好
+可以,YES,可以
+不是,NO,不是
+不需要,NO,不需要
+不用了,NO,不用了
+给我推荐一辆,看车,给我推荐一辆
+什么是A柱,TERMINOLOGY,什么是 <terminology> 
+A柱是什么,TERMINOLOGY, <terminology> 是什么
+什么是定速巡航,TERMINOLOGY,什么是  <columns> <terminology> 
+定速巡航是什么,TERMINOLOGY,  <columns> <terminology> 是什么
+定速巡航解释下,TERMINOLOGY,  <columns> <terminology> 解释下
+解释下定速巡航,TERMINOLOGY,解释下  <columns> <terminology> 
