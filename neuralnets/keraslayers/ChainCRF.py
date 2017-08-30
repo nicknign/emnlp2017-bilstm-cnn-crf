@@ -8,7 +8,7 @@ from __future__ import absolute_import
 from __future__ import print_function
 
 from keras import backend as K
-from keras import initializations, regularizers, constraints
+from keras import initializers, regularizers, constraints
 from keras.engine import Layer, InputSpec
 
 if K._BACKEND == 'tensorflow':
@@ -295,7 +295,7 @@ class ChainCRF(Layer):
         self.supports_masking = True
         self.uses_learning_phase = True
         self.input_spec = [InputSpec(ndim=3)]
-        self.init = initializations.get(init)
+        self.init = initializers.get(init)
 
         self.U_regularizer = regularizers.get(U_regularizer)
         self.b_start_regularizer = regularizers.get(b_start_regularizer)
@@ -378,7 +378,7 @@ class ChainCRF(Layer):
         return sparse_chain_crf_loss(y_true, y_pred, self.U, self.b_start, self.b_end, mask)
 
     def get_config(self):
-        config = {'init': self.init.__name__,
+        config = {'init': self.init.__name__ if not isinstance(self.init, initializers.VarianceScaling) else self.init.distribution,
                   'U_regularizer': self.U_regularizer.get_config() if self.U_regularizer else None,
                   'b_start_regularizer': self.b_start_regularizer.get_config() if self.b_start_regularizer else None,
                   'b_end_regularizer': self.b_end_regularizer.get_config() if self.b_end_regularizer else None,

@@ -25,9 +25,9 @@ ch.setFormatter(formatter)
 logger.addHandler(ch)
 
 # :: init ::
-jb.load_userdict("data/AutoForce/fenci.txt")
+jb.load_userdict("util/fenci.txt")
 
-modelPath = "models/AutoForce/NER_BIO/1.0000_1.0000_25.h5"
+modelPath = "models/AutoForce/NER_BIO/1.0000_1.0000_23.h5"
 inputPath = "input.txt"
 
 with open(inputPath, 'r') as f:
@@ -40,7 +40,7 @@ lstmModel.loadModel(modelPath)
 
 
 # :: Prepare the input ::
-sentences = [{'tokens': [sent for sent in jb.cut(line)]} for line in textlines]
+sentences = [{'tokens': [sent for sent in jb.cut(line.strip('\n'))]} for line in textlines]
 addCharInformation(sentences)
 addCasingInformation(sentences)
 
@@ -61,6 +61,8 @@ for sentenceIdx in range(len(sentences)):
 while(1):
     sentence = raw_input(">>>>>>>>")
     sentences = [{'tokens': [sent for sent in jb.cut(sentence)]}]
+    addCharInformation(sentences)
+    addCasingInformation(sentences)
     dataMatrix = createMatrices(sentences, lstmModel.mappings)
     tags = lstmModel.tagSentences(dataMatrix)
     tokens = sentences[0]['tokens']
