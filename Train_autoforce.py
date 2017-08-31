@@ -53,7 +53,7 @@ datasetFiles = [
 
 
 # :: Prepares the dataset to be used with the LSTM-network. Creates and stores cPickle files in the pkl/ folder ::
-pickleFile = perpareDataset(embeddingsPath, datasetFiles, commentSymbol="*")
+pickleFile = perpareDataset(embeddingsPath, datasetFiles, intentSymbol="*", commentSymbol="#")
 
 
 

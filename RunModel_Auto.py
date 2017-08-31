@@ -27,7 +27,7 @@ logger.addHandler(ch)
 # :: init ::
 jb.load_userdict("util/fenci.txt")
 
-modelPath = "models/AutoForce/NER_BIO/1.0000_1.0000_23.h5"
+modelPath = "models/AutoForce/NER_BIO/1.0000_1.0000_26.h5"
 inputPath = "input.txt"
 
 with open(inputPath, 'r') as f:
@@ -47,7 +47,7 @@ addCasingInformation(sentences)
 dataMatrix = createMatrices(sentences, lstmModel.mappings)
 
 # :: Tag the input ::
-tags = lstmModel.tagSentences(dataMatrix)
+tags, intents = lstmModel.tagSentences(dataMatrix)
 
 
 # :: Output to stdout ::
@@ -56,6 +56,7 @@ for sentenceIdx in range(len(sentences)):
     tokenTags = tags[sentenceIdx]
     for tokenIdx in range(len(tokens)):
         print("%s\t%s" % (tokens[tokenIdx], tokenTags[tokenIdx]))
+    print("Intent: %s" % (intents[sentenceIdx]))
     print("")
 
 while(1):
@@ -64,9 +65,10 @@ while(1):
     addCharInformation(sentences)
     addCasingInformation(sentences)
     dataMatrix = createMatrices(sentences, lstmModel.mappings)
-    tags = lstmModel.tagSentences(dataMatrix)
+    tags, intents = lstmModel.tagSentences(dataMatrix)
     tokens = sentences[0]['tokens']
     tokenTags = tags[0]
     for tokenIdx in range(len(tokens)):
         print("%s\t%s" % (tokens[tokenIdx], tokenTags[tokenIdx]))
+    print("Intent: %s" % (intents[0]))
     print("")

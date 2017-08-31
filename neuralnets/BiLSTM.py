@@ -11,6 +11,7 @@ import keras
 from keras.models import Model
 from keras.layers import *
 from keras.optimizers import *
+from keras.utils.np_utils import to_categorical
 
 import os
 import shutil
@@ -104,14 +105,18 @@ class BiLSTM:
         
         for batch in iterator: 
             labels = batch[0]
-            nnInput = batch[1:]                
-            self.model.train_on_batch(nnInput, labels)   
+            intents = batch[1]
+            nnInput = batch[2:]
+            self.model.train_on_batch(nnInput, [intents, labels])
             
     def predictLabels(self, sentences):
         if self.model == None:
             self.buildModel()
             
         predLabels = [None]*len(sentences)
+        preIntent = [None]*len(sentences)
+        label_predictions = []
+        intent_predictions = []
         
         sentenceLengths = self.getSentenceLengths(sentences)
         
@@ -136,15 +141,21 @@ class BiLSTM:
                     inputData[name] = np.asarray(inputData[name])
 
                 predictions = self.model.predict([inputData[name] for name in features], verbose=False)
-                predictions = predictions.argmax(axis=-1) #Predict classes      
+                label_predictions = predictions[1].argmax(axis=-1)
+                intent_predictions = predictions[0].argmax(axis=-1)
                 
             
             predIdx = 0
             for idx in indices:
-                predLabels[idx] = predictions[predIdx]    
-                predIdx += 1   
-        
-        return predLabels
+                predLabels[idx] = label_predictions[predIdx]
+                predIdx += 1
+
+            predIdx = 0
+            for idx in indices:
+                preIntent[idx] = intent_predictions[predIdx][:1]
+                predIdx += 1
+
+        return predLabels, preIntent
     
     
     # ------------ Some help functions to train on sentences -----------
@@ -168,18 +179,21 @@ class BiLSTM:
         random.shuffle(idxRange)
         
         for idx in idxRange:
-                labels = []                
                 features = ['tokens', 'casing']+self.additionalFeatures                
                 
                 labels = dataset[idx][labelKey]
                 labels = [labels]
-                labels = np.expand_dims(labels, -1)  
-                    
-                inputData = {}              
+                labels = np.expand_dims(labels, -1)
+
+                intents = [dataset[idx]['intent'][0]]
+                intents = to_categorical(intents, num_classes=33)
+                intents = np.expand_dims(intents, axis=-2)
+
+                inputData = {}
                 for name in features:
                     inputData[name] = self.data_generate(dataset[idx], name)
 
-                yield [labels] + [inputData[name] for name in features] 
+                yield [labels] + [intents] + [inputData[name] for name in features]
             
             
             
@@ -222,23 +236,27 @@ class BiLSTM:
                 numTrainExamples += len(tmpIndices)
                 
                 
-                labels = []                
+                labels = []
+                intents = []
                 features = ['tokens', 'casing']+self.additionalFeatures                
                 inputData = {name: [] for name in features}              
                 
                 for idx in tmpIndices:
                     labels.append(dataset[idx][labelKey])
-                    
+                    intents.append([dataset[idx]['intent'][0]])
                     for name in features:
                         inputData[name].append(self.data_generate(dataset[idx], name))
                                     
                 labels = np.asarray(labels)
                 labels = np.expand_dims(labels, -1)
+                intents = np.asarray(intents)
+                intents = to_categorical(intents, num_classes=33)
+                intents = np.expand_dims(intents, axis=-2)
                 
                 for name in features:
                     inputData[name] = np.asarray(inputData[name])
                  
-                yield [labels] + [inputData[name] for name in features]   
+                yield [labels] + [intents] + [inputData[name] for name in features]
                 
             assert(numTrainExamples == sentenceCount) #Check that no sentence was missed 
             
@@ -249,7 +267,9 @@ class BiLSTM:
         params = self.params
         decoder = None
         lossFct = None
+        bilstm = None
         opt = None
+        tag_output = None
         
         if self.params['charEmbeddings'] not in [None, "None", "none", False, "False", "false"]:
             self.padCharacters()      
@@ -326,21 +346,26 @@ class BiLSTM:
                     bilstm = TimeDistributed(Dropout(params['dropout']), name="dropout_"+str(cnt))(bilstm)
             
             cnt += 1
-        
+
+        lstm_1 = Dense(1, activation = 'sigmoid')(bilstm)
+        intent_decoder = Dense(len(self.dataset['mappings']['intent']), activation='softmax', name='intent_output')(lstm_1)
 
         # Softmax Decoder
         if params['classifier'].lower() == 'softmax':    
-            decoder = TimeDistributed(Dense(len(self.dataset['mappings'][self.labelKey]), activation='softmax'), name='softmax_output')(bilstm)
+            decoder = TimeDistributed(Dense(len(self.dataset['mappings'][self.labelKey]), activation='softmax'), name='tag_output')(bilstm)
+            tag_output = 'tag_output'
             lossFct = 'sparse_categorical_crossentropy'
         elif params['classifier'].lower() == 'crf':
-            decoder = TimeDistributed(Dense(len(self.dataset['mappings'][self.labelKey]), activation=None), name='hidden_layer')(bilstm)
+            decoder = TimeDistributed(Dense(len(self.dataset['mappings'][self.labelKey]), activation=None), name='tag_output')(bilstm)
             crf = ChainCRF()
             decoder = crf(decoder)
+            tag_output = 'chain_crf_1'
             lossFct = crf.sparse_loss 
         elif params['classifier'].lower() == 'tanh-crf':
-            decoder = TimeDistributed(Dense(len(self.dataset['mappings'][self.labelKey]), activation='tanh'), name='hidden_layer')(bilstm)
+            decoder = TimeDistributed(Dense(len(self.dataset['mappings'][self.labelKey]), activation='tanh'), name='tag_output')(bilstm)
             crf = ChainCRF()
             decoder = crf(decoder)
+            tag_output = 'chain_crf_1'
             lossFct = crf.sparse_loss 
         else:
             print("Please specify a valid classifier")
@@ -366,9 +391,10 @@ class BiLSTM:
         elif params['optimizer'].lower() == 'sgd':
             opt = SGD(lr=0.1, **optimizerParams)
         
-        model = Model(inputs=[tokens_input, casing_input], outputs=[decoder])
+        model = Model(inputs=[tokens_input, casing_input], outputs=[intent_decoder, decoder])
 
-        model.compile(loss=lossFct, optimizer=opt)
+        model.compile(optimizer=opt,
+                      loss = {'intent_output': 'categorical_crossentropy', tag_output: lossFct})
         
         self.model = model
         if self.verboseBuild:            
@@ -505,26 +531,30 @@ class BiLSTM:
                     sentences[sentenceIdx]['characters'][tokenIdx] = np.pad(token, (0, maxCharLen-len(token)), 'constant')
         
     
-        paddedPredLabels = self.predictLabels(sentences)        
+        paddedPredLabels, paddedPredIntent  = self.predictLabels(sentences)
         predLabels = []
+        PredIntent = []
         for idx in range(len(sentences)):           
             unpaddedPredLabels = []
             for tokenIdx in range(len(sentences[idx]['tokens'])):
                 if sentences[idx]['tokens'][tokenIdx] != 0: #Skip padding tokens                     
                     unpaddedPredLabels.append(paddedPredLabels[idx][tokenIdx])
-            
+            PredIntent.append(paddedPredIntent[idx][0])
             predLabels.append(unpaddedPredLabels)
             
             
         idx2Label = {v: k for k, v in self.mappings['label'].items()}
         labels = [[idx2Label[tag] for tag in tagSentence] for tagSentence in predLabels]
+
+        idx2Intent = {v: k for k, v in self.mappings['intent'].items()}
+        intents = [idx2Intent[tag] for tag in PredIntent]
         
-        return labels
+        return labels, intents
     
     def computeF1(self, sentences, name=''):
         correctLabels = []
         predLabels = []
-        paddedPredLabels = self.predictLabels(sentences)        
+        paddedPredLabels, PredIntents = self.predictLabels(sentences)
         
         for idx in range(len(sentences)):
             unpaddedCorrectLabels = []
@@ -574,7 +604,7 @@ class BiLSTM:
     
     def computeAcc(self, sentences):
         correctLabels = [sentences[idx][self.labelKey] for idx in range(len(sentences))]
-        predLabels = self.predictLabels(sentences) 
+        predLabels, predIntents = self.predictLabels(sentences)
         
         numLabels = 0
         numCorrLabels = 0

@@ -20,8 +20,9 @@ else: #Python 2.7 imports
 
 reload(sys)
 sys.setdefaultencoding('utf8')
+rootpath = os.path.split(os.path.realpath(__file__))[0] + "/../"
 
-def perpareDataset(embeddingsPath, datasetFiles, frequencyThresholdUnknownTokens=50, reducePretrainedEmbeddings=False, commentSymbol=None):
+def perpareDataset(embeddingsPath, datasetFiles, frequencyThresholdUnknownTokens=50, reducePretrainedEmbeddings=False, intentSymbol=None, commentSymbol=None):
     """
     Reads in the pre-trained embeddings (in text format) from embeddingsPath and prepares those to be used with the LSTM network.
     Unknown words in the trainDataPath-file are added, if they appear at least frequencyThresholdUnknownTokens times
@@ -38,11 +39,11 @@ def perpareDataset(embeddingsPath, datasetFiles, frequencyThresholdUnknownTokens
     embeddingsName = os.path.splitext(embeddingsPath)[0]
     datasetName = "_".join(sorted([datasetFile[0] for datasetFile in datasetFiles])+[embeddingsName])
     outputPath = './pkl/'+datasetName+'.pkl'
-    
+
     if os.path.isfile(outputPath):
         logging.info("Using existent pickle file: %s" % outputPath)
         return outputPath
-    
+
     #Check that the embeddings file exists
     if not os.path.isfile(embeddingsPath):
         if embeddingsPath == 'levy_deps.words':
@@ -54,9 +55,9 @@ def perpareDataset(embeddingsPath, datasetFiles, frequencyThresholdUnknownTokens
         else:
             print("The embeddings file %s was not found" % embeddingsPath)
             exit()
-    
+
     logging.info("Generate new embeddings files for a dataset: %s" % outputPath)
-    
+
     neededVocab = {}    
     if reducePretrainedEmbeddings:
         logging.info("Compute which tokens are required for the experiment")
@@ -176,7 +177,7 @@ def perpareDataset(embeddingsPath, datasetFiles, frequencyThresholdUnknownTokens
         testData = 'data/%s/test.txt' % datasetName 
         paths = [trainData, devData, testData]
     
-        pklObjects['datasets'][datasetName] = createPklFiles(paths, word2Idx, casing2Idx, datasetColumns, commentSymbol, padOneTokenSentence=True)
+        pklObjects['datasets'][datasetName] = createPklFiles(paths, word2Idx, casing2Idx, datasetColumns, intentSymbol, commentSymbol, padOneTokenSentence=True)
     
     
     f = open(outputPath, 'wb')
@@ -275,7 +276,11 @@ def createMatrices(sentences, mappings, padOneTokenSentence=True):
                             idx.append(str2Idx[c])
                         else:
                             idx.append(str2Idx['UNKNOWN'])                           
-                                      
+                elif mapping.lower() == 'intent':
+                    if not len(row[mapping]):
+                        idx = str2Idx[entry]
+                    else:
+                        idx = []
                 else:
                     idx = str2Idx[entry]
                                     
@@ -301,11 +306,11 @@ def createMatrices(sentences, mappings, padOneTokenSentence=True):
     
   
   
-def createPklFiles(datasetFiles, word2Idx, casing2Idx, cols, commentSymbol=None, valTransformation=None, padOneTokenSentence=False):       
+def createPklFiles(datasetFiles, word2Idx, casing2Idx, cols, intentSymbol=None, commentSymbol=None, valTransformation=None, padOneTokenSentence=False):
               
-    trainSentences = readCoNLL(datasetFiles[0], cols, commentSymbol, valTransformation)
-    devSentences = readCoNLL(datasetFiles[1], cols, commentSymbol, valTransformation)
-    testSentences = readCoNLL(datasetFiles[2], cols, commentSymbol, valTransformation)    
+    trainSentences = readCoNLL(datasetFiles[0], cols, intentSymbol, commentSymbol, valTransformation)
+    devSentences = readCoNLL(datasetFiles[1], cols, intentSymbol, commentSymbol, valTransformation)
+    testSentences = readCoNLL(datasetFiles[2], cols, intentSymbol, commentSymbol, valTransformation)
    
     mappings = createMappings(trainSentences+devSentences+testSentences)
     mappings['tokens'] = word2Idx
@@ -394,8 +399,7 @@ def getReimersEmbeddings():
         os.system("wget https://public.ukp.informatik.tu-darmstadt.de/reimers/2014_german_embeddings/2014_tudarmstadt_german_50mincount.vocab.gz")
 
 def getChineseEmbeddings():
-    #if not os.path.isfile("chinese_word.words"):
-    vecdf = pd.read_csv("vec.csv", encoding="utf-8")
+    vecdf = pd.read_csv("{}neuralnets/vec.csv".format(rootpath), encoding="utf-8")
     with open("chinese_word.words", "w", encoding="utf-8") as fp:
         for index, row in vecdf.iterrows():
             word = row["word"]
