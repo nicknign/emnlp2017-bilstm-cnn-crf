@@ -347,7 +347,7 @@ class BiLSTM:
             
             cnt += 1
 
-        lstm_1 = Dense(1, activation = 'sigmoid')(bilstm)
+        lstm_1 = Dense(1, activation = 'softmax')(bilstm)
         intent_decoder = Dense(len(self.dataset['mappings']['intent']), activation='softmax', name='intent_output')(lstm_1)
 
         # Softmax Decoder

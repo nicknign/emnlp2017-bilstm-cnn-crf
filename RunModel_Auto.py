@@ -27,7 +27,7 @@ logger.addHandler(ch)
 # :: init ::
 jb.load_userdict("util/fenci.txt")
 
-modelPath = "models/AutoForce/NER_BIO/1.0000_1.0000_26.h5"
+modelPath = "models/AutoForce/NER_BIO/1.0000_1.0000_24.h5"
 inputPath = "input.txt"
 
 with open(inputPath, 'r') as f:
